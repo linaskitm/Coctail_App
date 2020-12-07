@@ -20,17 +20,16 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 
 public class SearchActivity extends AppCompatActivity {
-    public static final String COVID_API = "https://covid19-api.weedmark.systems/api/v1/stats";
+    public static final String COCTAIL_API = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
 
     private RecyclerView recyclerView;
     private Adapter adapter;
 
-    private ArrayList<Corona> coronaList = new ArrayList<Corona>();
+    private ArrayList<Coctail> coctailArrayList = new ArrayList<Coctail>();
 
     SearchView searchView = null;
 
@@ -77,23 +76,21 @@ public class SearchActivity extends AppCompatActivity {
             if (searchView != null) {
                 searchView.clearFocus();
             }
-
             // From all countries covid list creates specific list by searched country
-            ArrayList<Corona> coronaListByCountry = JSON.getCoronaListByCountry(coronaList, query);
+            ArrayList<Coctail> coctailListByName = JSON.getCoctailListByName(coctailArrayList, query);
 
-            if (coronaListByCountry.size() == 0) {
+            if (coctailListByName.size() == 0) {
                 Toast.makeText(this, getResources().getString(R.string.search_no_results) + query, Toast.LENGTH_SHORT).show();
             }
-
             // Setup and Handover data to recyclerview
-            recyclerView = (RecyclerView) findViewById(R.id.corona_list);
-            adapter = new Adapter(SearchActivity.this, coronaListByCountry);
+            recyclerView = (RecyclerView) findViewById(R.id.coctail_list);
+            adapter = new Adapter(SearchActivity.this, coctailListByName);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
         }
     }
 
-    private class AsyncFetch extends AsyncTask<String, String, ArrayList<Corona>> {
+    private class AsyncFetch extends AsyncTask<String, String, ArrayList<Coctail>> {
         ProgressDialog pdLoading = new ProgressDialog(SearchActivity.this);
 
         @Override
@@ -103,31 +100,17 @@ public class SearchActivity extends AppCompatActivity {
             pdLoading.setMessage(getResources().getString(R.string.search_loading_data));
             pdLoading.setCancelable(false);
             pdLoading.show();
-            System.out.println("3333333333333333333333333333333333333333333333");
         }
-
         @Override
-        protected ArrayList<Corona> doInBackground(String... params) {
+        protected ArrayList<Coctail> doInBackground(String... params) {
             try {
-                JSONObject jsonObject = JSON.readJsonFromUrl(COVID_API);
+                JSONObject jsonObject = JSON.readJsonFromUrl(COCTAIL_API);
 
-                int statusCode = 0;
-                try {
-                    statusCode = (Integer) jsonObject.get("statusCode");
-                } catch (JSONException e) {
-                    Toast.makeText(
-                            SearchActivity.this,
-                            getResources().getText(R.string.search_error_reading_data) + e.getMessage(),
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
-                if (statusCode == HttpURLConnection.HTTP_OK) {
-                    System.out.println("5555555555555555555555555555555555555555555555");
                     JSONArray jsonArray = null;
-                    coronaList = new ArrayList<Corona>();
+                    coctailArrayList = new ArrayList<Coctail>();
                     try {
                         jsonArray = JSON.getJSONArray(jsonObject);
-                        coronaList = JSON.getList(jsonArray);
+                        coctailArrayList = JSON.getList(jsonArray);
                     } catch (JSONException e) {
                         Toast.makeText(
                                 SearchActivity.this,
@@ -135,24 +118,7 @@ public class SearchActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG
                         ).show();
                     }
-                    return coronaList;
-                } else { // something went wrong
-                    String message = null;
-                    try {
-                        message = (String) jsonObject.get("message");
-                    } catch (JSONException e) {
-                        Toast.makeText(
-                                SearchActivity.this,
-                                getResources().getText(R.string.search_error_reading_data) + e.getMessage(),
-                                Toast.LENGTH_LONG
-                        ).show();
-                    }
-                    Toast.makeText(
-                            SearchActivity.this,
-                            getResources().getText(R.string.search_error_reading_data) + message,
-                            Toast.LENGTH_LONG
-                    ).show();
-                }
+                    return coctailArrayList;
             } catch (JSONException | IOException e1) {
                 Toast.makeText(
                         SearchActivity.this,
@@ -161,11 +127,10 @@ public class SearchActivity extends AppCompatActivity {
                 ).show();
                 return null;
             }
-            return null;
         }// doInBackground
 
         @Override
-        protected void onPostExecute(ArrayList<Corona> coronaList) {
+        protected void onPostExecute(ArrayList<Coctail> coronaList) {
             //this method will be running on UI thread
             pdLoading.dismiss();
 

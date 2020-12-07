@@ -15,10 +15,10 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private LayoutInflater inflater;
-    List<Corona> data;
+    List<Coctail> data;
 
     // create constructor to initialize context and data sent from SearchActivity
-    public Adapter(Context context, List<Corona> data) {
+    public Adapter(Context context, List<Coctail> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.data = data;
@@ -27,7 +27,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // Inflate the layout when ViewHolder created
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.container_corona, parent, false);
+        View view = inflater.inflate(R.layout.container_coctail, parent, false);
         MyHolder holder = new MyHolder(view);
         return holder;
     }
@@ -37,11 +37,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         // Get current position of item in RecyclerView to bind data and assign values from list
         MyHolder myHolder = (MyHolder) holder;
-        Corona current = data.get(position);
-        myHolder.textKeyId.setText(current.getKeyId());
-        myHolder.textLastUpdate.setText("Last update: " + current.getLastUpdate());
-        myHolder.textConfirmed.setText("Confirmed: " + current.getConfirmed());
-        myHolder.textDeaths.setText("Deaths: " + current.getDeaths());
+        Coctail current = data.get(position);
+        myHolder.drinkName.setText(current.getDrinkName());
+        myHolder.drinkTags.setText("Tags: " + current.getDrinkTags());
+        myHolder.drinkCategory.setText("Category: " + current.getDrinkCategory());
+        myHolder.drinkGlass.setText("Glass: " + current.getDrinkGlass());
 
     }
 
@@ -53,18 +53,18 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView textKeyId;
-        TextView textLastUpdate;
-        TextView textConfirmed;
-        TextView textDeaths;
+        TextView drinkName;
+        TextView drinkTags;
+        TextView drinkCategory;
+        TextView drinkGlass;
 
         // create constructor to get widget reference
         public MyHolder(View itemView) {
             super(itemView);
-            textKeyId = (TextView) itemView.findViewById(R.id.textKeyId);
-            textLastUpdate = (TextView) itemView.findViewById(R.id.textLastUpdate);
-            textConfirmed = (TextView) itemView.findViewById(R.id.textConfirmed);
-            textDeaths = (TextView) itemView.findViewById(R.id.textDeaths);
+            drinkName = (TextView) itemView.findViewById(R.id.drinkName);
+            drinkTags = (TextView) itemView.findViewById(R.id.drinkTags);
+            drinkCategory = (TextView) itemView.findViewById(R.id.drinkCategory);
+            drinkGlass = (TextView) itemView.findViewById(R.id.drinkGlass);
             itemView.setOnClickListener(this);
         }
 
