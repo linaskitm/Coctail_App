@@ -76,7 +76,7 @@ public class SearchActivity extends AppCompatActivity {
             if (searchView != null) {
                 searchView.clearFocus();
             }
-            // From all countries covid list creates specific list by searched country
+            // From all  list creates specific list by searched name
             ArrayList<Coctail> coctailListByName = JSON.getCoctailListByName(coctailArrayList, query);
 
             if (coctailListByName.size() == 0) {

@@ -39,10 +39,12 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         MyHolder myHolder = (MyHolder) holder;
         Coctail current = data.get(position);
         myHolder.drinkName.setText(current.getDrinkName());
-        myHolder.drinkTags.setText("Tags: " + current.getDrinkTags());
+        myHolder.drinkTags.setText("Type: " + current.getDrinkTags());
         myHolder.drinkCategory.setText("Category: " + current.getDrinkCategory());
-        myHolder.drinkGlass.setText("Glass: " + current.getDrinkGlass());
-
+        myHolder.drinkGlass.setText(current.getDrinkGlass());
+        myHolder.drinkIngredients1.setText(current.getIngredients1());
+        myHolder.drinkIngredients2.setText(current.getIngredients2());
+        myHolder.drinkIngredients3.setText(current.getIngredients3());
     }
 
     // return total item from List
@@ -57,6 +59,9 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView drinkTags;
         TextView drinkCategory;
         TextView drinkGlass;
+        TextView drinkIngredients1;
+        TextView drinkIngredients2;
+        TextView drinkIngredients3;
 
         // create constructor to get widget reference
         public MyHolder(View itemView) {
@@ -65,13 +70,16 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             drinkTags = (TextView) itemView.findViewById(R.id.drinkTags);
             drinkCategory = (TextView) itemView.findViewById(R.id.drinkCategory);
             drinkGlass = (TextView) itemView.findViewById(R.id.drinkGlass);
+            drinkIngredients1 = (TextView) itemView.findViewById(R.id.drinkIngredient1);
+            drinkIngredients2 = (TextView) itemView.findViewById(R.id.drinkIngredient2);
+            drinkIngredients3 = (TextView) itemView.findViewById(R.id.drinkIngredient3);
             itemView.setOnClickListener(this);
         }
 
         // Click event for all items
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "You clicked an item", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "You clicked an item " , Toast.LENGTH_SHORT).show();
         }
     }
 }

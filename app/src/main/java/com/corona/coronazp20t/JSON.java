@@ -51,9 +51,12 @@ public class JSON {
             Coctail coctail = new Coctail(
                     json_data.getString("idDrink"),
                     json_data.getString("strDrink"),
-                    json_data.getString("strTags"),
+                    json_data.getString("strAlcoholic"),
                     json_data.getString("strCategory"),
-                    json_data.getString("strGlass")
+                    json_data.getString("strGlass"),
+                    json_data.getString("strIngredient1"),
+                    json_data.getString("strIngredient2"),
+                    json_data.getString("strIngredient3")
             );
             coctailsList.add(coctail);
         }
