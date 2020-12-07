@@ -60,10 +60,10 @@ public class JSON {
         return coctailsList;
     }
 
-    public static ArrayList<Coctail> getCoctailListByName(ArrayList<Coctail> coctailsList, String coctailName) {
+    public static ArrayList<Coctail> getCoctailListByName(ArrayList<Coctail> coctailsList, String drinkName) {
         ArrayList<Coctail> coctailListByName = new ArrayList<Coctail>();
         for (Coctail coctail : coctailsList) {
-            if (coctail.getDrinkName().contains(coctailName)) {
+            if (coctail.getDrinkName().contains(drinkName)) {
                 coctailListByName.add(coctail);
             }
         }

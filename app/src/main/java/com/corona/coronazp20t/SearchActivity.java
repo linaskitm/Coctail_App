@@ -111,6 +111,7 @@ public class SearchActivity extends AppCompatActivity {
                     try {
                         jsonArray = JSON.getJSONArray(jsonObject);
                         coctailArrayList = JSON.getList(jsonArray);
+                        System.out.println(coctailArrayList);
                     } catch (JSONException e) {
                         Toast.makeText(
                                 SearchActivity.this,
@@ -130,12 +131,12 @@ public class SearchActivity extends AppCompatActivity {
         }// doInBackground
 
         @Override
-        protected void onPostExecute(ArrayList<Coctail> coronaList) {
+        protected void onPostExecute(ArrayList<Coctail> coctailArrayList) {
             //this method will be running on UI thread
             pdLoading.dismiss();
 
-            if (coronaList != null) {
-                Toast.makeText(SearchActivity.this, getResources().getString(R.string.search_found_entries_from_api) + coronaList.size(), Toast.LENGTH_SHORT).show();
+            if (coctailArrayList != null) {
+                Toast.makeText(SearchActivity.this, getResources().getString(R.string.search_found_entries_from_api) + coctailArrayList.size(), Toast.LENGTH_SHORT).show();
             }
         }//onPostExecute
     }//AsyncFetch class
