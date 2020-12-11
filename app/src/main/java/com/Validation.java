@@ -1,4 +1,4 @@
-package com.corona.coronazp20t;
+package com;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

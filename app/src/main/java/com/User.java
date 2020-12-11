@@ -1,4 +1,4 @@
-package com.corona.coronazp20t;
+package com;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,7 +10,7 @@ public class User {
     private String email;
 
     private SharedPreferences sharedPreferences;
-    private static String PREFERENCES_PACKAGE_NAME = "com.corona.coronazp20t";
+    private static String PREFERENCES_PACKAGE_NAME = "com";
     private  static String USERNAME_KEY = "username";
     private static String PASSWORD_KEY = "password";
     private static String REMEMBERME_KEY = "rememberMe";
@@ -61,7 +61,7 @@ public class User {
     }
 
     public void setUsernameKey(String username) {
-        this.sharedPreferences.edit().putString(USERNAME_KEY, username).commit();
+        this.sharedPreferences.edit().putString(USERNAME_KEY, username).apply();
     }
 
     public String getPasswordKey() {
@@ -69,7 +69,7 @@ public class User {
     }
 
     public void setPasswordKey(String password) {
-        this.sharedPreferences.edit().putString(PASSWORD_KEY, password).commit();
+        this.sharedPreferences.edit().putString(PASSWORD_KEY, password).apply();
     }
 
     public boolean getRemembermeKey() {

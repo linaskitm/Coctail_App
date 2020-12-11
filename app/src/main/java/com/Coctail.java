@@ -1,4 +1,4 @@
-package com.corona.coronazp20t;
+package com;
 
 public class Coctail {
     private String drinkId;

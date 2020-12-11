@@ -1,4 +1,4 @@
-package com.corona.coronazp20t;
+package com;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +64,7 @@ public class JSON {
     }
 
     public static ArrayList<Coctail> getCoctailListByName(ArrayList<Coctail> coctailsList, String drinkName) {
+        drinkName= drinkName.substring(0,1).toUpperCase() + drinkName.substring(1).toLowerCase();
         ArrayList<Coctail> coctailListByName = new ArrayList<Coctail>();
         for (Coctail coctail : coctailsList) {
             if (coctail.getDrinkName().contains(drinkName)) {

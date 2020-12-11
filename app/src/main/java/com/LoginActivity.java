@@ -1,4 +1,4 @@
-package com.corona.coronazp20t;
+package com;
 
 
 import android.content.Intent;
